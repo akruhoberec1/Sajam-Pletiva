@@ -77,8 +77,10 @@ class RegistracijaController extends Controller
         if(strlen($this->entitet->password)===0){
             $this->poruka = 'Lozinka obavezna';
             return false;
-        }
+        }else{
+        $this->entitet->password = password_hash($this->entitet->password,PASSWORD_BCRYPT);
         return true;
+        }
     }
 
 

@@ -11,6 +11,7 @@ class Registracija
             insert into users (username,password,email,country,ime,prezime)
             values (:username,:password,:email,:country,:ime,:prezime);
         ');
+       
         $izraz->execute([
             'username'=>$p['username'],
             'password'=>$p['password'],

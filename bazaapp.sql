@@ -17,7 +17,7 @@ insert into operater (email,lozinka,username,uloga) values
 create table users(
 id int not null primary key auto_increment,
 username varchar(20),
-password varchar(30),
+password varchar(100),
 email varchar(120),
 country varchar(50),
 ime varchar(20),
