@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="<?=App::config('url') ?>"><?=App::config('nazivApp')?></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="<?=App::config('url') ?>">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <?php if(App::auth()):  /* autoriziram za dodatne stvari u meniju*/?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?=App::config('url') ?>controlpanel">Control Panel</a>
+      </li>
+      <?php endif; ?>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Padajući
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      </ul>
+      <ul class="justify-content-end">
+      <li>
+      <a class="btn btn-primary" href="<?=App::config('url') ?>login/login" role="button">Login</a>
+      </li>
+    
+      <?php if(App::auth()):  /* autoriziram za dodatne stvari u meniju*/?>
+        <li>
+      <a class="btn btn-secondary me-1" href="<?=App::config('url') ?>login/logout" role="button">Logout</a>
+      </li>
+      <?php endif; ?>
+      </ul>
+      
+    
+
+  </div>
+</nav>

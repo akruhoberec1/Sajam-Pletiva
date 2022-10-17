@@ -1,0 +1,37 @@
+<form method="post" action="<?=App::config('url')?>login/autorizacija"> 
+<div class="container">
+<div class="d-flex justify-content-center">
+      <div>      
+            <img class="mb-4" src="<?=App::config('url')?>public/img/loginpic.jpg" alt="" width="256" height="256">
+      </div>
+</div>
+<div class="d-flex justify-content-center">
+      <h1 class="h3 mb-3 font-weight-normal text-center">Ulogirajte se, molimo</h1>
+</div>
+      <div class="container align-items-center">
+      <form class="row g-3 align-items-center">
+
+            <div class="col-md-6  justify-content-center">
+            <label class="col-form-label" for="inputEmail" class="sr-only">Email</label>
+            <input type="email" value="<?=$email?>" id="email" name="email" class="form-control" placeholder="Email adresa" required autofocus>
+            </div>
+
+
+            <div class="col-md-6  justify-content-center">
+            <label class="col-form-label" for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" value="o" required>
+            </div>
+      </form>
+      </div>
+
+<div class="checkbox mb-3 d-flex align-items-center">
+    <label>
+          <input type="checkbox" value="remember-me"> Zapamti me
+    </label>
+</div>
+<div class="d-flex align-items-center">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</div>
+</div>
+      <p class="mt-5 mb-3 text-muted"><?=$poruka?></p>
+</form>

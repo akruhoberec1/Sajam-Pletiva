@@ -1,0 +1,26 @@
+<a href="<?=App::config('url')?>korisnici/novi"
+    class="btn btn-primary justify-content-center">Dodaj novi</a>
+<div class="container">
+    <?php foreach($entiteti as $e):?>
+        <div class="large-3 cell">
+            <div class="callout" style="text-align: center;">
+                slika
+                <h1 style="font-size: 1.5rem;"> <?=$e->username?></h1>
+              
+                <?=$e->prezime?>, <?=$e->ime?>
+               <br />
+                <a href="<?=App::config('url')?>korisnici/promjena/<?=$e->id?>">
+                    <i style="color: blue;" 
+                    class="bi bi-pencil"></i>
+                </a>
+               
+                <a onclick="return confirm('Sigurno obrisati <?=$e->username?>?');" 
+                    href="<?=App::config('url')?>korisnici/brisanje/<?=$e->id?>">
+                    <i class="bi bi-fire"></i>
+                </a>
+                
+            </div>
+        </div>
+        <hr />
+   <?php endforeach; ?>
+</div>
