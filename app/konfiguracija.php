@@ -6,7 +6,7 @@ if($dev){
     return [
         'dev'=>$dev,
         'url'=>'http://ucenjephp.hr/',
-        'nazivApp'=>'Crochet Store',
+        'nazivApp'=>'Sajam Pletiva',
         'baza'=>[
             'server'=>'localhost',
             'baza'=>'bazaapp',
@@ -18,7 +18,7 @@ if($dev){
     return [
     'dev'=>$dev,
     'url'=>'http://polaznik15.edunova.hr/',
-    'nazivApp'=>'Crochet Store',
+    'nazivApp'=>'Sajam Pletiva',
     'baza'=>[
         'server'=>'localhost',
         'baza'=>'apolon_bazaapp',

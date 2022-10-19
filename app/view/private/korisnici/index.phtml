@@ -1,26 +1,48 @@
-<a href="<?=App::config('url')?>korisnici/novi"
-    class="btn btn-primary justify-content-center">Dodaj novi</a>
-<div class="container">
-    <?php foreach($entiteti as $e):?>
-        <div class="large-3 cell">
-            <div class="callout" style="text-align: center;">
-                slika
-                <h1 style="font-size: 1.5rem;"> <?=$e->username?></h1>
-              
-                <?=$e->prezime?>, <?=$e->ime?>
-               <br />
-                <a href="<?=App::config('url')?>korisnici/promjena/<?=$e->id?>">
-                    <i style="color: blue;" 
-                    class="bi bi-pencil"></i>
-                </a>
-               
-                <a onclick="return confirm('Sigurno obrisati <?=$e->username?>?');" 
-                    href="<?=App::config('url')?>korisnici/brisanje/<?=$e->id?>">
-                    <i class="bi bi-fire"></i>
-                </a>
-                
-            </div>
-        </div>
-        <hr />
-   <?php endforeach; ?>
+<div class="program">
+    <div>
+        <a href="<?= App::config('url') ?>korisnici/novi" class="btn btn-secondary">Dodaj novog korisnika</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ime</th>
+                <th scope="col">Prezime</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Država</th>
+                <th scope="col">Kontrole</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($entiteti as $e) {
+                echo '<tr>
+        <td>' . $e->id . '</td>
+        <td>' . $e->username . '</td>
+        <td>' . $e->email . '</td>
+        <td>' . $e->ime . '</td>
+        <td>' . $e->prezime . '</td>
+        <td>' . $e->country . '</td>
+        <td>' . '<a href=' . '<?= App::config(\'url\')?>' . 'korisnici/promjena/' . '<?= $e->id =>' . '>' 
+        . '<i style="color: blue;" class="bi bi-pencil"></i>'
+        .
+        '</td>
+        </tr>';
+            }
+
+            ?>
+        </tbody>
+    </table>
+
 </div>
+
+
+<!-- <a href="<?= App::config('url') ?>korisnici/promjena/<?= $e->id ?>">
+    <i style="color: blue;" class="bi bi-pencil"></i>
+</a> -->
+
+<a onclick="return confirm('Sigurno obrisati <?= $e->username ?>?');" href="<?= App::config('url') ?>korisnici/brisanje/<?= $e->id ?>">
+    <i class="bi bi-fire"></i>
+</a>

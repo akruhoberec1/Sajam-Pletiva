@@ -4,7 +4,6 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
         <li class="nav-item active">
           <a class="nav-link" href="<?= App::config('url') ?>">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -18,23 +17,18 @@
         <?php endif; ?>
         <?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
           <li>
-            <a class="btn btn-primary align-self-end" href="<?= App::config('url') ?>loginuser/prijava" role="button">Prijavite se</a>
+            <a class="nav-link" href="<?= App::config('url') ?>loginuser/prijava" role="button">Prijavite se</a>
           </li>
         <?php endif; ?>
 
         <?php if (App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
           <li>
-            <a class="btn btn-secondary align-self-end" href="<?= App::config('url') ?>login/odjava" role="button">Logout</a>
+            <a class="nav-link" href="<?= App::config('url') ?>login/odjava" role="button">Logout</a>
           </li>
         <?php endif; ?>
         <?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
           <li>
-            <a class="btn btn-secondary align-self-end" href="<?= App::config('url') ?>registracija/novi" role="button">Registracija</a>
-          </li>
-        <?php endif; ?>
-        <?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
-          <li>
-            <a class="btn btn-primary align-self-end" href="<?= App::config('url') ?>login/prijava" role="button">Admin login</a>
+            <a class="nav-link" href="<?= App::config('url') ?>registracija/novi" role="button">Registracija</a>
           </li>
         <?php endif; ?>
         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>

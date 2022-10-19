@@ -1,7 +1,13 @@
-<div <?php 
-if(App::config('dev')){
-    echo 'style="background-color: red;"';
-}
-?> >
-    &copy; <?php  echo App::config('nazivApp');?>
+<footer class="py-5 bg-dark">
+<div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; <?php  echo App::config('nazivApp');?></p>
 </div>
+<div class="container">
+    <p class="m-0 text-center text-white"><?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
+          <li>
+            <a class="nav-link" href="<?= App::config('url') ?>login/prijava" role="button">Admin login</a>
+          </li>
+        <?php endif; ?>
+    </p>
+</div>
+</footer>

@@ -1,34 +1,34 @@
-<form method="post" 
+<form class="program" method="post" 
 action="<?=App::config('url')?>registracija/promjena/<?=$e->id?>">
   <h4 class="text-center">Unesite podatke</h4>
-  
-  <label>Prezime
-    <input type="text" name="prezime" value="<?=$e->prezime?>" />
+<div class="justify content center"> 
+  <label class="form-label">Prezime
+    <input class="form-control" type="text" name="prezime" value="<?=$e->prezime?>" />
   </label>
 <br />
-  <label>Ime
-    <input type="text" name="ime" value="<?=$e->ime?>" />
+  <label  class="form-label">Ime
+    <input class="form-control"  type="text" name="ime" value="<?=$e->ime?>" />
   </label>
 
   <br />
-  <label>Username
-    <input type="text" name="username" value="<?=$e->username?>" />
+  <label  class="form-label">Username
+    <input class="form-control"  type="text" name="username" value="<?=$e->username?>" />
+  </label >
+  <br />
+  <label  class="form-label">Password
+    <input class="form-control"  type="password" name="password" value="<?=$e->password?>" />
   </label>
   <br />
-  <label>Password
-    <input type="text" name="password" value="<?=$e->password?>" />
+  <label  class="form-label">Email
+    <input class="form-control" type="email" name="email" value="<?=$e->email?>" />
   </label>
   <br />
-  <label>Email
-    <input type="email" name="email" value="<?=$e->email?>" />
-  </label>
-  <br />
-  <label>Country
-    <input type="text" name="country" value="<?=$e->country?>" />
+  <label  class="form-label">Country
+    <input class="form-control" type="text" name="country" value="<?=$e->country?>" />
   </label>
   <br />
   <?=$poruka?>
-
+</div>
   <div class="grid-x grid-padding-x">
     <div class="large-6 cell">
         <a class="alert button expanded" 
