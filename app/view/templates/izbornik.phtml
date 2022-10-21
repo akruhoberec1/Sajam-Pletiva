@@ -1,62 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<?=App::config('url') ?>"><?=App::config('nazivApp')?></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container px-lg-5">
+    <a class="navbar-brand" href="<?= App::config('url') ?>"><?= App::config('nazivApp') ?></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="<?= App::config('url') ?>">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= App::config('url') ?>galerija/">Galerija</a>
+        </li>
+        <?php if (App::auth()) : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= App::config('url') ?>nadzornaploca/">Control Panel</a>
+          </li>
+        <?php endif; ?>
+        <?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
+          <li>
+            <a class="nav-link" href="<?= App::config('url') ?>loginuser/prijava" role="button">Prijavite se</a>
+          </li>
+        <?php endif; ?>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="<?=App::config('url') ?>">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=App::config('url') ?>galerija/">Galerija</a>
-      </li>
-      <?php if(App::auth()):?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=App::config('url') ?>nadzornaploca/">Control Panel</a>
-      </li>
-      <?php endif; ?>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Zadaci
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Ciklička matrica</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Provjera OIB-a</a>
-          <div class="dropdown-divider"></div>
-          <?php /*<a class="dropdown-item" href="#">Something else here</a>*/?>
-        </div>
-      </li>
-
-      <ul class="nav navbar-nav ms-auto justify-content-end">
-      <?php if(!App::auth()):  /* autoriziram za dodatne stvari u meniju*/?>
-      <li>
-      <a class="btn btn-primary align-self-end" href="<?=App::config('url') ?>loginuser/prijava" role="button">Prijavite se</a>
-      </li>
-      <?php endif; ?>
-      
-      <?php if(App::auth()):  /* autoriziram za dodatne stvari u meniju*/?>
-        <li>
-      <a class="btn btn-secondary align-self-end" href="<?=App::config('url') ?>login/odjava" role="button">Logout</a>
-      </li>
-      <?php endif; ?>
-      <?php if(!App::auth()):  /* autoriziram za dodatne stvari u meniju*/?>
-      
-        <li>
-      <a class="btn btn-secondary align-self-end" href="<?=App::config('url') ?>registracija/novi" role="button">Registracija</a>
-      </li>
-      <?php endif; ?>
-
-      <?php if(!App::auth()):  /* autoriziram za dodatne stvari u meniju*/?>
-      <li>
-      <a class="btn btn-primary align-self-end" href="<?=App::config('url') ?>login/prijava" role="button">Admin login</a>
-      </li>
-      <?php endif; ?>
+        <?php if (App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
+          <li>
+            <a class="nav-link" href="<?= App::config('url') ?>login/odjava" role="button">Logout</a>
+          </li>
+        <?php endif; ?>
+        <?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
+          <li>
+            <a class="nav-link" href="<?= App::config('url') ?>registracija/novi" role="button">Registracija</a>
+          </li>
+        <?php endif; ?>
+        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
       </ul>
-      
-      
-    </ul>
+    </div>
   </div>
 </nav>

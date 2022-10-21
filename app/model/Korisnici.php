@@ -145,4 +145,25 @@ class Korisnici
 
         $veza->commit();
     }
+
+    public static function search($uvjet)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+            select a.sifra, a.brojugovora,
+            b.ime, b.prezime, b.email, 
+            b.oib from 
+            polaznik a inner join
+            osoba b on a.osoba =b.sifra 
+            where concat(b.ime,\' \', b.prezime) like :uvjet
+            and a.sifra not in (select korisnik from clan where
+            slika=:slika)
+            order by 2,1
+            limit 10
+        ');
+        $izraz->execute([
+            'uvjet' => '%' . $uvjet . '%'
+        ]); 
+        return $izraz->fetchAll(); 
+    }
 }

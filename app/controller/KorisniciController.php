@@ -113,4 +113,12 @@ class KorisniciController extends AutorizacijaController
         }
         
     }
+
+    public function trazi()
+    {
+        if(!isset($_GET['term'])){
+            return;
+        }
+        echo json_encode(Korisnici::search($_GET['term'],$_GET['grupa']));
+    }
 }
