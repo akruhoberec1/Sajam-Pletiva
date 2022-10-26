@@ -21,4 +21,16 @@ class Registracija
             'prezime'=>$p['prezime']
         ]);
     }
+
+    public static function readUsers()
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select * from users
+        
+        ');
+        $izraz->execute();
+        return $izraz->fetch(); 
+    }
 }

@@ -1,4 +1,5 @@
 <form method="post" 
+enctype="multipart/form-data"
 action="<?=App::config('url')?>korisnici/promjena/<?=$e->id?>">
   <h4 class="text-center">Detalji korisnika</h4>
   
@@ -27,6 +28,12 @@ action="<?=App::config('url')?>korisnici/promjena/<?=$e->id?>">
   <label>Country
     <input type="text" name="country" value="<?=$e->country?>" />
   </label>
+  <br />
+  <label>Slika
+    <input type="file" name="slika">
+  </label>
+  <br />
+  <img src="<?=$e->slika?>" alt="">
   <br />
   <?=$poruka?>
 

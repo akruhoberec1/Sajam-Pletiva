@@ -67,7 +67,7 @@ class App
             return false;
         }
 
-        if(!isset($_SESSION['autoriziranoperater' || 'autoriziranuser'])){
+        if(!isset($_SESSION['autoriziranoperater'])){
             return false;
         }
 
@@ -76,7 +76,15 @@ class App
 
     public static function user()
     {
-        return $_SESSION['autoriziranuser'];
+        if(!isset($_SESSION)){
+            return false;
+        }
+
+        if(!isset($_SESSION['autoriziranuser'])){
+            return false;
+        }
+
+        return true;
     }
 
 

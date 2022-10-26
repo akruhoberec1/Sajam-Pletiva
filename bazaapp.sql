@@ -1,4 +1,4 @@
-#C:\Users\Phreeek>c:\xampp\mysql\bin\mysql -uroot -p --default_character_set=utf8 < "C:\Users\Phreeek\Desktop\ucenjephp.hr\bazaapp.sql"
+#c:\xampp\mysql\bin\mysql -uphreeek -p --default_character_set=utf8 < "C:\Users\Phreeek\Desktop\ucenjephp.hr\bazaapp.sql"
 
 drop database if exists bazaapp;
 create database bazaapp default character set utf8;
@@ -29,16 +29,15 @@ prezime varchar(20)
 create table galerija(
     id int not null primary key auto_increment,
     naziv varchar(100) not null,
+    opis varchar(255) not null,
     putanja varchar(255) not null,
-    boja varchar(50) not null,
-    kategorija int not null
+    boja int not null,
+    kategorija int not null,
+    users int not null,
+    pletivo int not null,
+    datumuploada datetime not null
 );
 
-create table clan(
-    id int not null primary key auto_increment,
-    users int not null,
-    galerija int not null
-);
 
 create table kategorija(
     id int not null primary key auto_increment,
@@ -56,37 +55,53 @@ create table boja(
     naziv varchar(50)
 );
 
+create table clan(
+    id int not null primary key auto_increment,
+    galerija int not null,
+    boja int not null
+);
 
+
+
+alter table galerija add foreign key(users) references users(id);
+alter table galerija add foreign key(kategorija) references kategorija(id);
+alter table galerija add foreign key(pletivo) references pletivo(id);
 
 alter table clan add foreign key(galerija) references galerija(id);
-alter table clan add foreign key(users) references users(id);
-
-alter table galerija add foreign key(kategorija) references kategorija(id);
+alter table clan add foreign key(boja) references boja(id);
 
 
 insert into pletivo (naziv,debljina) values 
 ('CYCA 0','2ply'),('CYCA 1','3ply'),('CYCA 2','5ply'),('CYCA 3','8ply'),('CYCA 4','10ply'),('CYCA 6','>10ply');
 
 insert into kategorija (naziv) values
-('Disney'),('Gaming'),('Tradicionalno'),('Harry Potter'),('LoTR'),('Star Wars'),('Bratz'),('Pjevači'),('Pjevačice'),('Životinjsko carstvo'),('Anime'),('Halloween');
+('Disney'),('Gaming'),('Tradicionalno'),('Harry Potter'),('LoTR'),('Star Wars'),('Bratz'),('Pjevači'),('Pjevačice'),('Životinjsko carstvo'),('Anime'),('Halloween'),('Priroda');
 
 insert into boja (naziv) values
-('Zelena'),('Bijela'),('Crna'),('Plava'),('Crvena'),('Smeđa'),('Žuta'),('Ljubičasta'),('Roza'),('Bež');
+('Zelena'),('Bijela'),('Crna'),('Plava'),('Crvena'),('Smeđa'),('Žuta'),('Ljubičasta'),('Roza'),('Bež'),('Siva'),('Narančasta');
 
 insert into users(username,password,email,country,ime,prezime) values
-('writerironclad','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail1@mail.hr','','Hana','Tenk'),
-('examplemortician','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail2@mail.hr','','Petra','Jenić'),
-('matterburied','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail3@mail.hr','','Danko','Rožna'),
-('parliamentbane','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail4@mail.hr','','Dinko','Rich'),
-('choirclassic','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail5@mail.hr','','Hinko','Rich'),
-('toothjeer','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail6@mail.hr','','Finko','Rich'),
-('probablytada','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail7@mail.hr','','Tara','Naramak'),
-('tobaccocluttered','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail8@mail.hr','','Lara','Oršo'),
-('fleetworth','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail9@mail.hr','','Mara','Trebić'),
-('springelevator','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail10@mail.hr','','Larry','Black'),
-('punchdock','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail11@mail.hr','','Barry','White'),
-('unpacktraffic','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail12@mail.hr','','Marko','Larić'),
-('tickarray','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail13@mail.hr','','Darko','Žarić'),
-('lemonbeg','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail14@mail.hr','','Žarko','Marić'),
-('plumshoal','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail15@mail.hr','','Nataša','Prpić'),
-('scourgetrashy','$2a$08$I4YT5mH2Vl2IsaiNmWnoje49sCuofdfghuDYU7/IdNiLNjVhN3IYm','mail16@mail.hr','','Saša','Geter');
+('writerironclad','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail1@mail.hr','','Hana','Tenk'),
+('examplemortician','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail2@mail.hr','','Petra','Jenić'),
+('matterburied','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail3@mail.hr','','Danko','Rožna'),
+('parliamentbane','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail4@mail.hr','','Dinko','Rich'),
+('choirclassic','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail5@mail.hr','','Hinko','Rich'),
+('toothjeer','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail6@mail.hr','','Finko','Rich'),
+('probablytada','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail7@mail.hr','','Tara','Naramak'),
+('tobaccocluttered','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail8@mail.hr','','Lara','Oršo'),
+('fleetworth','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail9@mail.hr','','Mara','Trebić'),
+('springelevator','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail10@mail.hr','','Larry','Black'),
+('punchdock','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail11@mail.hr','','Barry','White'),
+('unpacktraffic','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail12@mail.hr','','Marko','Larić'),
+('tickarray','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail13@mail.hr','','Darko','Žarić'),
+('lemonbeg','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail14@mail.hr','','Žarko','Marić'),
+('plumshoal','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail15@mail.hr','','Nataša','Prpić'),
+('scourgetrashy','$2a$12$L0..hkm.KKdjM1sN83IT2ucrgnagTJ65FEIDVo1KBVac.JVFBPGIi','mail16@mail.hr','','Saša','Geter');
+
+insert into galerija(naziv,opis,putanja,boja,kategorija,users,pletivo,datumuploada) values
+('Morž','Morževi uživaju na obali','galerija/slika1.jpg',11,10,1,6,now()),
+('Kava','Jutarnja kavica se sipa','galerija/slika2.jpg',6,3,2,2,now()),
+('Planina','Matterhorn se presijava u zoru','galerija/slika3.jpg',8,13,3,1,now()),
+('Pas','Crni labrador moli za hranu','galerija/slika4.jpg',3,10,6,4,now()),
+('Svjetionik','Slika svjetionika u magli','galerija/slika5.jpg',10,13,8,4,now()),
+('Brijeg','Brijeg miruje u osami','galerija/slika6.jpg',12,13,10,3,now());

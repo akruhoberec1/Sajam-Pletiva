@@ -12,8 +12,17 @@ class KorisniciController extends AutorizacijaController
 
     public function index()
     {
-        $this->view->render($this->phtmlDir . 'index',[
-            'entiteti'=>Korisnici::read()
+        $lista = Korisnici::read();
+        foreach($lista as $p){
+            if(file_exists(BP. 'public' . DIRECTORY_SEPARATOR . 'img' . 
+            DIRECTORY_SEPARATOR . 'korisnici' . DIRECTORY_SEPARATOR . $p->id . '.jpg')){
+                $p->slika= App::config('url') . 'public/img/korisnici/' . $p->id . '.jpg';
+            }else{
+                $p->slika= App::config('url') . 'public/img/nepoznato.jpg'; 
+            }
+        }
+        $this->view->render($this->phtmlDir . 'index',[  
+            'entiteti'=>$lista
         ]);
     }
 
@@ -39,7 +48,12 @@ class KorisniciController extends AutorizacijaController
             if($e==null){
                 header('location: ' . App::config('url') . 'korisnici');
             }
-
+            if(file_exists(BP. 'public' . DIRECTORY_SEPARATOR . 'img' . 
+            DIRECTORY_SEPARATOR . 'korisnici' . DIRECTORY_SEPARATOR . $e->id . '.jpg')){
+                $e->slika= App::config('url') . 'public/img/korisnici/' . $e->id . '.jpg';
+            }else{
+                $e->slika= App::config('url') . 'public/img/nepoznato.jpg'; 
+            }
             $this->view->render($this->phtmlDir . 'detalji',[
                 'e' => $e,
                 'poruka' => 'Unesite podatke'
@@ -52,9 +66,17 @@ class KorisniciController extends AutorizacijaController
     
         if($this->kontrola()){
             Korisnici::update((array)$this->entitet);
+//određivanje gdje se miče slika tj. sprema
+            if(isset($_FILES['slika'])){
+                move_uploaded_file($_FILES['slika']['tmp_name'], 
+                BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR
+                 . 'korisnici' . DIRECTORY_SEPARATOR . $id . '.jpg');
+            }
+
             header('location: ' . App::config('url') . 'korisnici');
             return;
         }
+        
 
         $this->view->render($this->phtmlDir . 'detalji',[
             'e'=>$this->entitet,

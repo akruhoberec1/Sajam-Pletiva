@@ -15,23 +15,23 @@
             <a class="nav-link" href="<?= App::config('url') ?>nadzornaploca/">Control Panel</a>
           </li>
         <?php endif; ?>
-        <?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
+        <?php if (!App::user() && !App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
           <li>
             <a class="nav-link" href="<?= App::config('url') ?>loginuser/prijava" role="button">Prijavite se</a>
           </li>
         <?php endif; ?>
 
-        <?php if (App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
+        <?php if (App::auth() || App::user()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
           <li>
             <a class="nav-link" href="<?= App::config('url') ?>login/odjava" role="button">Logout</a>
           </li>
         <?php endif; ?>
-        <?php if (!App::auth()) :  /* autoriziram za dodatne stvari u meniju*/ ?>
+        <?php if(!isset($_SESSION['autoriziranuser']) && !isset($_SESSION['autoriziranoperater'])) :  /* autoriziram za dodatne stvari u meniju*/ ?>
           <li>
             <a class="nav-link" href="<?= App::config('url') ?>registracija/novi" role="button">Registracija</a>
           </li>
         <?php endif; ?>
-        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= App::config('url') ?>/kontakt">Kontakt</a></li>
       </ul>
     </div>
   </div>

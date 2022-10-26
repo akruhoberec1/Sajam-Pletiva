@@ -52,7 +52,7 @@ class LoginController extends Controller
 
     public function odjava()
     {
-        unset($_SESSION['autoriziranoperater']);
+        unset($_SESSION['autoriziranoperater' && 'autoriziranuser']);
         session_destroy();
         $this->prijavaView('','Uspješno ste odjavljeni');
                

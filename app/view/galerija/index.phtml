@@ -1,7 +1,15 @@
-<div class="container d-flex program">
+<form enctype="multipart/form-data" action="">
+    <div class="container d-flex program">
+
+        <?php foreach ($entiteti as $e)  : ?>
+           
+       <?php  echo '<div>' . '<img src=" ' . $e->slika . '"' . '</div>'
+         . '<div>' . $e->naziv . $e->opis . '</div>'
+         ; ?>
+
+       
+        <?php endforeach; ?>
 
 
-
-
-
-</div>
+    </div>
+</form>

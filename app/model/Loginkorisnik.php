@@ -2,7 +2,7 @@
 
 class Loginkorisnik
 {
-    public static function autoriziraj($email,$password)
+    public static function autorizirajuser($email,$password)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
@@ -22,5 +22,6 @@ class Loginkorisnik
         }
         unset($users->password);
         return $users;
+        return $users->id;
     }
 }

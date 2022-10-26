@@ -1,9 +1,14 @@
+<form 
+enctype="multipart/form-data"
+action="">
 <div class="program">
 
     <div class="row" style="margin-top: 10px;">
-        <div class="col-8">
-            <form action="<?= App::config('url') ?>polaznik/index" method="get">
+        <div class="col-10">
+            <form action="<?= App::config('url') ?>korisnici/index" method="get">
+         
                 <input type="text" name="uvjet" placeholder="Unesite dio imena, prezimena ili OIB-a" value="<?= $uvjet ?>" />
+    
             </form>
         </div>
         <div class="col-2">
@@ -13,11 +18,12 @@
 
 
 
-
+<div style="margin-top: 30px;">
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Slika</th>
             <th scope="col">Ime</th>
             <th scope="col">Prezime</th>
             <th scope="col">Username</th>
@@ -31,16 +37,16 @@
         foreach ($entiteti as $e) {
             echo '<tr>
         <td>' . $e->id . '</td>
+        <td>' . '<img src=" ' . $e->slika . '" width="50px;" height="50px;">'. '</td>
         <td>' . $e->ime . '</td>
         <td>' . $e->prezime . '</td>
         <td>' . $e->username . '</td>
         <td>' . $e->email . '</td>
         <td>' . $e->country . '</td>
-        <td>' . '<a href=' . '<?= App::config(\'url\')?>/korisnici/promjena/<?=$e->id?>>'
-                . '<i style="color: blue;" class="bi bi-pencil"></i>'
-                . '<a onclick="return confirm(\'Sigurno obrisati <?= $e->username ?>?\');" href="<?= App::config(\'url\') ?>korisnici/brisanje/<?= $e->id ?>">
-                <i class="bi bi-fire"></i>
-            </a>' . 
+        <td>' . '<a href=' . "'/korisnici/promjena/$e->id'"
+                . "<i style='color: blue;' class='bi bi-pencil'></i>"
+                . "<a href='/korisnici/brisanje/$e->id'>
+                <i class='bi bi-fire'></i></a>" . 
                 '</td>
         </tr>';
         }
@@ -50,6 +56,7 @@
 </table>
 
 </div>
+</form>
 
 
 <!-- <a href="<?= App::config('url') ?>korisnici/promjena/<?= $e->id ?>">

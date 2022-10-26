@@ -9,7 +9,7 @@ class RegistracijaController extends Controller
     
     private $entitet=null;
     private $poruka='';
-
+    private $sqlduplicate=null;
 
 
     public function novi()
@@ -58,6 +58,9 @@ class RegistracijaController extends Controller
         ]);
     }
 
+
+
+
     private function kontrola()
     {
         return $this->kontrolaUsername() && $this->kontrolaPassword();
@@ -65,6 +68,7 @@ class RegistracijaController extends Controller
 
     private function kontrolaUsername()
     {
+
         if(strlen($this->entitet->username)===0){
             $this->poruka = 'Username obavezno';
             return false;

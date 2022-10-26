@@ -29,7 +29,7 @@ class LoginuserController extends Controller
         }
 
         
-        $user = Loginkorisnik::autoriziraj($_POST['email'],$_POST['password']);
+        $user = Loginkorisnik::autorizirajuser($_POST['email'],$_POST['password']);
         if($user==null){
             $this->prijavauserView($_POST['email'],'Email i/ili Lozinka neispravni');
             return;
@@ -38,7 +38,7 @@ class LoginuserController extends Controller
 
        
             $_SESSION['autoriziranuser']=$user;
-            header('location:' . App::config('url') . 'profil');
+            header('location:' . App::config('url') . 'profil/index');
 
     }
 
