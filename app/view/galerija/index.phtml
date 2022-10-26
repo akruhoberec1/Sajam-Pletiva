@@ -1,15 +1,19 @@
-<form enctype="multipart/form-data" action="">
-    <div class="container d-flex program">
 
+    <div class="container program">
+    <table><tr>
         <?php foreach ($entiteti as $e)  : ?>
            
-       <?php  echo '<div>' . '<img src=" ' . $e->slika . '"' . '</div>'
-         . '<div>' . $e->naziv . $e->opis . '</div>'
-         ; ?>
+       <?php echo
+       
+        '<img src=" ' . $e->slika . '" class="img-thumbnail">' 
+         ; 
+         
+         
+         ?>
 
        
         <?php endforeach; ?>
 
+        </tr></table>
 
     </div>
-</form>
