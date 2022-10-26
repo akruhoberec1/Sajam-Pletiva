@@ -37,7 +37,7 @@ class LoginController extends Controller
 
 
        
-            $_SESSION['autoriziran']=$operater;
+            $_SESSION['autoriziranoperater']=$operater;
             header('location:' . App::config('url') . 'nadzornaploca');
 
     }
@@ -52,7 +52,7 @@ class LoginController extends Controller
 
     public function odjava()
     {
-        unset($_SESSION['autoriziran']);
+        unset($_SESSION['autoriziranoperater']);
         session_destroy();
         $this->prijavaView('','Uspješno ste odjavljeni');
                

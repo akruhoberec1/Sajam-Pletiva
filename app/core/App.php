@@ -67,7 +67,7 @@ class App
             return false;
         }
 
-        if(!isset($_SESSION['autoriziran'])){
+        if(!isset($_SESSION['autoriziranoperater' || 'autoriziranuser'])){
             return false;
         }
 
@@ -76,7 +76,7 @@ class App
 
     public static function user()
     {
-        return $_SESSION['autoriziran'];
+        return $_SESSION['autoriziranuser'];
     }
 
 

@@ -37,7 +37,7 @@ class LoginuserController extends Controller
 
 
        
-            $_SESSION['autoriziran']=$user;
+            $_SESSION['autoriziranuser']=$user;
             header('location:' . App::config('url') . 'profil');
 
     }
@@ -54,7 +54,7 @@ class LoginuserController extends Controller
 
     public function odjava()
     {
-        unset($_SESSION['autoriziran']);
+        unset($_SESSION['autoriziranuser']);
         session_destroy();
         $this->prijavauserView('','Uspješno ste odjavljeni');
                
