@@ -1,20 +1,50 @@
-<div class="container d-flex program">
+<div class="container program">
 
         
-OVO JE PROFIL
+<?php $sess = (array)$_SESSION['autoriziranuser']; 
+      $id = $sess['id'];?>
+
+
+
+        
+
+
+
+
+<section class="pt-4">
+  <div class="container px-lg-5">
+    <!-- Page Features-->
+    <div class="row gx-lg-5">
+      <div class="col-lg-6 col-xxl-4 mb-5">
+        <div class="card bg-light border-0 h-100">
+          <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+            <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-people-fill"></i></div>
+            <h2 class="fs-4 fw-bold">Profil</h2>
+            <p class="mb-0">Uredite vlastiti profil</p>
+            <a href="<?= App::config('url') ?>profil/uredi/<?=$id?>" class="btn btn-secondary">Uredi</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xxl-4 mb-5">
+        <div class="card bg-light border-0 h-100">
+          <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+            <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-4 mt-n4"><i class="bi bi-images"></i></div>
+            <h2 class="fs-4 fw-bold">Galerija</h2>
+            <p class="mb-0">Uređivanje galerije slika</p>
+            <a href="<?= App::config('url') ?>galerija/citajJednog/<?=$id?>" class="btn btn-secondary">Uredi</a>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+
+</div>
+
+
+
+
 
 <!-- početak slikarenja -->
 
-<div class="reveal" id="slikaModal" data-reveal>
-    <div style="max-height: 300px; overflow: auto;">
-        <img id="image" src="" alt="" />
-    </div>
-  
-  <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
-  <a href="#" id="spremi">Spremi</a>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 
-</div>
+

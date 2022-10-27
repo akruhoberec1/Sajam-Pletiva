@@ -10,6 +10,11 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= App::config('url') ?>galerija/">Galerija</a>
         </li>
+        <?php if(App::user()) : ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= App::config('url') ?>profil/">Profil</a>
+        </li>
+        <?php endif; ?>
         <?php if (App::auth()) : ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= App::config('url') ?>nadzornaploca/">Control Panel</a>

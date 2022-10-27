@@ -105,6 +105,7 @@ class KorisniciController extends AutorizacijaController
             $this->poruka = 'Lozinka obavezna';
             return false;
         }
+        $this->entitet->password = password_hash($this->entitet->password,PASSWORD_BCRYPT);
         return true;
     }
 
@@ -141,6 +142,6 @@ class KorisniciController extends AutorizacijaController
         if(!isset($_GET['term'])){
             return;
         }
-        echo json_encode(Korisnici::search($_GET['term'],$_GET['grupa']));
+        echo json_encode(Korisnici::search($_GET['term']));
     }
 }

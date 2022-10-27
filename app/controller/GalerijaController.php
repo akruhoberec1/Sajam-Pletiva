@@ -22,5 +22,26 @@ class GalerijaController extends Controller
             'entiteti'=>$lista
         ]);
     }
+
+    public function citajJednog($id)
+    {
+        $lista = Profil::readGalleryByUserId($id);
+
+        foreach($lista as $p){
+            if(file_exists(BP. 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR
+        . 'galerija' . DIRECTORY_SEPARATOR . 'slika' . $p->id . '.jpg')){
+            $p->slika= App::config('url') . 'public/img/galerija/' . 'slika' . $p->id . '.jpg';
+        }else{
+            $p->slika= 'ne mogu pronaći putanju';
+        }
+        }
+
+            $this->view->render('private' . DIRECTORY_SEPARATOR . 'profil'
+            . DIRECTORY_SEPARATOR . 'slikekorisnika',[
+                'entiteti'=>$lista
+            ]);
+    }
+
+
 }
 

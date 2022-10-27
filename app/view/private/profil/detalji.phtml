@@ -1,0 +1,51 @@
+<form class="program" method="post" 
+enctype="multipart/form-data"
+action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
+  <h4 class="text-center">Unesite podatke</h4>
+<div class="justify content center" style="margin-left: 600px;"> 
+  <label class="form-label">Prezime
+    <input class="form-control" type="text" name="prezime" value="<?=$e->prezime?>" />
+  </label>
+<br />
+  <label  class="form-label">Ime
+    <input class="form-control"  type="text" name="ime" value="<?=$e->ime?>" />
+  </label>
+
+  <br />
+  <label  class="form-label">Username
+    <input class="form-control"  type="text" name="username" value="<?=$e->username?>" />
+  </label >
+  <br />
+  <label  class="form-label">Password
+    <input class="form-control"  type="text hidden" name="password" value="<?=$e->password?>" />
+  </label>
+  <br />
+  <label  class="form-label">Email
+    <input class="form-control" type="email" name="email" value="<?=$e->email?>" />
+  </label>
+  <br />
+  <label  class="form-label">Country
+    <input class="form-control" type="text" name="country" value="<?=$e->country?>" />
+  </label>
+  <br />
+  <label>Slika
+    <input type="file" name="slika">
+  </label>
+  <br />
+  <img src="<?=$e->slika?>" alt="">
+  <br />
+  <?=$poruka?>
+</div>
+ <div style="margin-left: 600px;">
+    <div class="">
+        <a href="<?=App::config('url')?>profil"><input class="btn btn-secondary col-3" value="Odustani"></a>
+    </div>
+    <div class="" style="margin-top: 10px;">
+       <a href="<?=App::config('url')?>profil"> <input type="submit" class="btn btn-success col-3" value="Promijeni podatke"></input>
+       </a>
+      </div>
+  </div>
+ 
+
+
+</form>
