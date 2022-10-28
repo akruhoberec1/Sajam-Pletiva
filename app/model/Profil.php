@@ -28,4 +28,19 @@ class Profil
         $izraz->execute(['id'=>$id]); // OVO MORA BITI OBAVEZNO
         return $izraz->fetchAll(); // vraća indeksni niz objekata tipa stdClass   
     }
+
+    public static function brisanje($sifra)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select count(*) from grupa where smjer=:sifra
+        
+        ');
+        $izraz->execute([
+            'sifra'=>$sifra
+        ]);
+        $ukupno = $izraz->fetchColumn();
+        return $ukupno==0; 
+    }
 }

@@ -1,7 +1,8 @@
 <form class="program" method="post" 
 enctype="multipart/form-data"
 action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
-  <h4 class="text-center">Unesite podatke</h4>
+
+  <h4 class="text-center"></h4>
 <div class="justify content center" style="margin-left: 600px;"> 
   <label class="form-label">Prezime
     <input class="form-control" type="text" name="prezime" value="<?=$e->prezime?>" />
@@ -32,7 +33,7 @@ action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
     <input type="file" name="slika">
   </label>
   <br />
-  <img src="<?=$e->slika?>" alt="">
+  <img src="<?=$e->slika?>" style="cursor: pointer;" class="slika" id="p_<?php $e->id ?>"> 
   <br />
   <?=$poruka?>
 </div>
@@ -45,7 +46,20 @@ action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
        </a>
       </div>
   </div>
- 
+
+
+  
+<div class="reveal" id="slikaModal" data-reveal>
+    <div style="max-height: 300px; overflow: auto;">
+        <img id="image" src="" alt="" />
+    </div>
+  
+  <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+  <a href="#" id="spremi">Spremi</a>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
 
 </form>

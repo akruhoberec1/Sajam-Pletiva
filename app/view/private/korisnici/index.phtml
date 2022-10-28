@@ -1,65 +1,76 @@
-<form 
-enctype="multipart/form-data"
-action="">
-<div class="program">
+<form enctype="multipart/form-data" action="">
+    <div class="program">
+        <div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-10">
+                    <form action="<?= App::config('url') ?>korisnici/index" method="get">
 
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-10">
-            <form action="<?= App::config('url') ?>korisnici/index" method="get">
-         
-                <input type="text" name="uvjet" placeholder="Unesite dio imena, prezimena ili OIB-a" value="<?= $uvjet ?>" />
-    
-            </form>
+                        <div class="form-outline mb-4">
+                            <input type="text"  class="form-control" id="uvjet" placeholder="Upišite dio podatka korisnika">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-2">
+                    <a href="<?= App::config('url') ?>korisnici/novi" class="btn btn-secondary">Dodaj korisnika</a>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="col-2">
-            <a href="<?= App::config('url') ?>korisnici/novi" class="btn btn-secondary">Dodaj korisnika</a>
-        </div>
-    </div>
 
 
 
-<div style="margin-top: 30px;">
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Slika</th>
-            <th scope="col">Ime</th>
-            <th scope="col">Prezime</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Država</th>
-            <th scope="col">Kontrole</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        foreach ($entiteti as $e) {
-            echo '<tr>
+        <div style="margin-top: 30px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Slika</th>
+                        <th scope="col">Ime</th>
+                        <th scope="col">Prezime</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Država</th>
+                        <th scope="col">Kontrole</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($entiteti as $e) {
+                        echo '<tr>
         <td>' . $e->id . '</td>
-        <td>' . '<img src=" ' . $e->slika . '" width="50px;" height="50px;">'. '</td>
+        <td>' . '<img src=" ' . $e->slika . '" width="50px;" height="50px;">' . '</td>
         <td>' . $e->ime . '</td>
         <td>' . $e->prezime . '</td>
         <td>' . $e->username . '</td>
         <td>' . $e->email . '</td>
         <td>' . $e->country . '</td>
-        <td>' . '<a href=' . "'/korisnici/promjena/$e->id'"
-                . "<i style='color: blue;' class='bi bi-pencil'></i>"
-                . "<a href='/korisnici/brisanje/$e->id'>
-                <i class='bi bi-fire'></i></a>" . 
-                '</td>
-        </tr>';
-        }
+        <td>' . '<a href=' . "'/korisnici/promjena/$e->id'" .                    
+        "<i style='color: blue;' class='bi bi-pencil'></i>" .
+        "<a href='/korisnici/brisanje/$e->id'>
+        <i class='bi bi-fire'></i></a>" .
+        "<i style='disabled; 'class='bi bi-fire'></i>" .
+        '</td></tr>';
+                    }
 
-        ?>
-    </tbody>
-</table>
+                    ?>
+                </tbody>
+            </table>
 
-</div>
+        </div>
 </form>
 
 
 <!-- <a href="<?= App::config('url') ?>korisnici/promjena/<?= $e->id ?>">
     <i style="color: blue;" class="bi bi-pencil"></i>
 </a> -->
-

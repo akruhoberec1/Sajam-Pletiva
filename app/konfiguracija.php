@@ -7,6 +7,7 @@ if($dev){
         'dev'=>$dev,
         'url'=>'http://ucenjephp.hr/',
         'nazivApp'=>'Sajam Pletiva',
+        'rps'=>8,
         'baza'=>[
             'server'=>'localhost',
             'baza'=>'bazaapp',
@@ -19,6 +20,7 @@ if($dev){
     'dev'=>$dev,
     'url'=>'http://polaznik15.edunova.hr/',
     'nazivApp'=>'Sajam Pletiva',
+    'rps'=>8,
     'baza'=>[
         'server'=>'localhost',
         'baza'=>'apolon_bazaapp',

@@ -9,10 +9,38 @@ class KorisniciController extends AutorizacijaController
 
     private $entitet=null;
     private $poruka='';
+    
 
     public function index()
     {
-        $lista = Korisnici::read();
+        if(!isset($_GET['stranica'])){
+            $stranica=1;
+        }else{
+            $stranica=(int)$_GET['stranica'];
+        }
+        
+
+        if(!isset($_GET['uvjet'])){
+            $uvjet='';
+        }else{
+            $uvjet=$_GET['uvjet'];
+        }
+
+
+        $up = Korisnici::ukupnoKorisnika($uvjet);
+        var_dump($up);
+        //$ukupnoStranica = ceil($up / App::config('rps'));
+        $ukupnoStranica=12;
+        if($stranica>$ukupnoStranica){
+            $stranica = 1;
+        }
+
+        if($stranica==0){
+            $stranica=$ukupnoStranica;
+        }
+
+        
+        $lista = Korisnici::read($stranica,$uvjet);
         foreach($lista as $p){
             if(file_exists(BP. 'public' . DIRECTORY_SEPARATOR . 'img' . 
             DIRECTORY_SEPARATOR . 'korisnici' . DIRECTORY_SEPARATOR . $p->id . '.jpg')){
@@ -22,8 +50,14 @@ class KorisniciController extends AutorizacijaController
             }
         }
         $this->view->render($this->phtmlDir . 'index',[  
-            'entiteti'=>$lista
+            'entiteti'=>$lista,
+            'uvjet'=>$uvjet,
+            'ukupnostranica'=>12,
+            'css'=>'<link rel="stylesheet" href="' . App::config('url') . 'public/css/cropper.css">',
+            'js'=>'<script src="' . App::config('url') . 'public/js/vendor/cropper.js"></script>
+            <script src="' . App::config('url') . 'public/js/indexKorisnik.js"></script>'
         ]);
+        
     }
 
     public function novi()
@@ -139,9 +173,21 @@ class KorisniciController extends AutorizacijaController
 
     public function trazi()
     {
-        if(!isset($_GET['term'])){
-            return;
-        }
-        echo json_encode(Korisnici::search($_GET['term']));
+        echo json_encode(Korisnici::search($_GET['uvjet']));
+    }
+
+    public function spremisliku(){
+
+        $slika = $_POST['slika'];
+        $slika=str_replace('data:image/png;base64,','',$slika);
+        $slika=str_replace(' ','+',$slika);
+        $data=base64_decode($slika);
+
+        file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR
+        . 'img' . DIRECTORY_SEPARATOR . 
+        'korisnici' . DIRECTORY_SEPARATOR 
+        . 'slika' . $_POST['id'] . '.jpg', $data);
+
+        echo "OK";
     }
 }

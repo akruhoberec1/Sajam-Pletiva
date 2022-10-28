@@ -5,6 +5,9 @@ class GalerijaController extends Controller
     public $phtmlDir = 'galerija' .
         DIRECTORY_SEPARATOR;
 
+    public $entitet;
+    public $poruka;
+
     public function index()
     {
         $lista = Galerija::read();
@@ -41,6 +44,136 @@ class GalerijaController extends Controller
                 'entiteti'=>$lista
             ]);
     }
+
+    public function novaSlika()
+    {
+
+        $nova = Galerija::create([
+            'naziv'=>'',
+            'opis'=>'', 
+            'putanja'=>null,
+            'boja'=>'',
+            'kategorija'=>'',
+            'users'=>'',
+            'pletivo'=>''
+        ]);
+        header('location: ' . App::config('url') 
+                . 'galerija/promjena/' . $nova);
+    }
+
+    public function promjena($sifra)
+    {
+        $kategorije=$this->ucitajKategorije();
+        $boje=$this->ucitajBoje();
+        $pletiva=$this->ucitajPletiva();
+
+        if(!isset($_POST['naziv'])){
+
+            $e = Galerija::readOne($sifra);
+            //Log::log($e);
+            if($e==null){
+                header('location: ' . App::config('url') . 'galerija');
+            }
+            
+            $this->detalji($e,$kategorije,$boje,$pletiva,'Unesite podatke');
+            return;
+        }
+
+        $this->entitet = (object) $_POST;
+        $this->entitet->id=$sifra;
+
+    
+
+        if($this->kontrola()){
+        if($this->entitet->kategorija==0){
+            $this->entitet->kategorija=null;
+        }
+        Galerija::update((array)$this->entitet);
+        header('location: ' . App::config('url') . 'galerija');
+        return;
+        }
+
+        $this->detalji($this->entitet,$kategorije,$boje,$pletiva,$this->poruka);
+
+    }
+    
+    public function detalji($e,$kategorije,$boje,$pletiva,$poruka)
+    {
+
+        $this->view->render($this->phtmlDir . 'detalji',[
+            'e'=>$e,
+            'kategorije'=>$kategorije,
+            'boje'=>$boje,
+            'pletiva'=>$pletiva,
+            'poruka'=>$poruka,
+            'css'=>'<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">',
+            'js'=>'<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+            <script>
+                let url=\'' .  App::config('url') .  '\';
+                let galerija=' . $e->sifra . ';
+            </script>
+            <script src="'. App::config('url') . 'public/js/detaljiGalerije.js"></script>
+            '
+        ]);
+
+    }
+
+    private function ucitajBoje()
+    {
+        $boje = [];
+        $b = new stdClass();
+        $b->sifra=0;
+        $b->naziv='Odaberi boju';
+        $boje[]=$b;
+        foreach(Boja::read() as $boja){
+            $boje[]=$boja;
+        }
+        return $boje;
+
+    }
+
+    private function ucitajPletiva()
+    {
+        $pletiva = [];
+        $p = new stdClass();
+        $p->sifra=0;
+        $p->naziv='Odaberi vrstu pletiva';
+        $pletiva[]=$p;
+        foreach(Pletivo::read() as $pletivo){
+            $pletiva[]=$pletivo;
+        }
+        return $pletiva;
+
+    }
+
+    private function ucitajKategorije()
+    {
+        $kategorije = [];
+        $k = new stdClass();
+        $k->sifra=0;
+        $k->naziv='Odaberi boju';
+        $kategorije[]=$k;
+        foreach(Kategorija::read() as $kategorija){
+            $kategorije[]=$kategorija;
+        }
+        return $kategorije;
+
+    }
+
+    private function kontrola()
+    {
+        return $this->kontrolaKategorija();
+    }
+
+    private function kontrolaKategorija(){
+        if($this->entitet->kategorija==0){
+            $this->poruka='Obavezno odabrati kategoriju';
+            return false;
+        }
+        return true;
+    }
+
+
 
 
 }

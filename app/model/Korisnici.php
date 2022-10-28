@@ -18,14 +18,26 @@ class Korisnici
     }
 
     // CRUD - R
-    public static function read()
+    public static function read($stranica,$uvjet)
     {
+
+        $rps = App::config('rps');
+        $od = $stranica * $rps - $rps;
+
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select * from users
+            select id,ime,prezime,email,username,country from users
+            where concat(ime,\'\',prezime,\'\',email,\'\',username)
+            like :uvjet
+            limit :od, :rps
         
         ');
+        $uvjet= '%' . $uvjet . '%';
+
+        $izraz->bindValue('od',$od,PDO::PARAM_INT);
+        $izraz->bindValue('rps',$rps,PDO::PARAM_INT);
+        $izraz->bindParam('uvjet',$uvjet);
         $izraz->execute(); // OVO MORA BITI OBAVEZNO
         return $izraz->fetchAll(); // vraća indeksni niz objekata tipa stdClass
     }
@@ -48,15 +60,15 @@ class Korisnici
             'prezime'=>$p['prezime']
         ]);
         $sifraOsoba = $veza->lastInsertId();
-        /*$izraz = $veza->prepare('
+        $izraz = $veza->prepare('
             insert into users (username,email)
             values (:username,:email);
         ');
         $izraz->execute([
             'username'=>$sifraOsoba,
             'email'=>$p['email']
-        ]);*/
-        /*$sifraKorisnik = $veza->lastInsertId();*/
+        ]);
+        $sifraKorisnik = $veza->lastInsertId();
         $veza->commit();
         return $sifraOsoba;
     }
@@ -150,15 +162,7 @@ class Korisnici
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
-            select a.sifra, a.brojugovora,
-            b.ime, b.prezime, b.email, 
-            b.oib from 
-            polaznik a inner join
-            osoba b on a.osoba =b.sifra 
-            where concat(b.ime,\' \', b.prezime) like :uvjet
-            and a.sifra not in (select korisnik from clan where
-            slika=:slika)
-            order by 2,1
+            select username,ime,prezime,email from users
             limit 10
         ');
         $izraz->execute([
@@ -166,4 +170,37 @@ class Korisnici
         ]); 
         return $izraz->fetchAll(); 
     }
+
+    public static function slikeBezKorisnika()
+    {
+        $veza= DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select a.id, a.username, count(b.users) as kolicinaslika 
+        from users a left join galerija b on a.id=b.users 
+        group by a.id,a.username  
+        
+        ');
+
+        $izraz->execute();
+        return $izraz->fetchAll();
+
+    }
+
+    public static function ukupnoKorisnika($uvjet)
+    {
+        $veza= DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        select count(id) from users where concat(ime,\'\',
+        prezime,\'\',email,\'\',username)
+        like :uvjet
+        
+        ');
+        $uvjet = '%' . $uvjet . '%';
+        $izraz->bindParam('uvjet',$uvjet,PDO::PARAM_INT);
+        $izraz->execute();
+        return $izraz->fetchAll();
+    }
+
 }

@@ -14,6 +14,7 @@ class ProfilController extends AutorizacijauserController
     {
 
         $this->view->render($this->phtmlDir . 'index');
+        
     }
 
     public function uredi($id)
@@ -84,6 +85,7 @@ class ProfilController extends AutorizacijauserController
         
         return true;
     }
-   
+    
+    
 
 }

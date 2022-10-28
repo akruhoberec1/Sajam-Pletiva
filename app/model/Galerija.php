@@ -42,4 +42,39 @@ class Galerija
         return $izraz->fetchAll(); // vraća indeksni niz objekata tipa stdClass   
     }
 
+    public static function readOne($sifra)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+           select * from galerija where id=:sifra
+        
+        ');
+        $izraz->execute([
+            'id'=>$sifra
+        ]);
+        $img = $izraz->fetch();
+
+        return $img;
+    }
+
+    public static function update($p)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        update galerija set
+            naziv=:naziv,
+            opis=:opis,
+            boja=:boja,
+            kategorija=:kategorija,
+            pletivo=:pletivo
+        where sifra=:sifra;
+        
+        ');
+        $izraz->execute($p);
+    }
+
+
+
 }

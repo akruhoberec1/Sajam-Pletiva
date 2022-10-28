@@ -35,7 +35,8 @@ create table galerija(
     kategorija int not null,
     users int not null,
     pletivo int not null,
-    datumuploada datetime not null
+    datumuploada datetime not null,
+    tag int 
 );
 
 
@@ -58,7 +59,12 @@ create table boja(
 create table clan(
     id int not null primary key auto_increment,
     galerija int not null,
-    boja int not null
+    tag int not null
+);
+
+create table tag(
+    id int not null primary key auto_increment,
+    naziv varchar(20)
 );
 
 
@@ -66,9 +72,10 @@ create table clan(
 alter table galerija add foreign key(users) references users(id);
 alter table galerija add foreign key(kategorija) references kategorija(id);
 alter table galerija add foreign key(pletivo) references pletivo(id);
+alter table galerija add foreign key(boja) references boja(id);
 
 alter table clan add foreign key(galerija) references galerija(id);
-alter table clan add foreign key(boja) references boja(id);
+alter table clan add foreign key(tag) references tag(id);
 
 
 insert into pletivo (naziv,debljina) values 
@@ -104,4 +111,23 @@ insert into galerija(naziv,opis,putanja,boja,kategorija,users,pletivo,datumuploa
 ('Planina','Matterhorn se presijava u zoru','galerija/slika3.jpg',8,13,3,1,now()),
 ('Pas','Crni labrador moli za hranu','galerija/slika4.jpg',3,10,6,4,now()),
 ('Svjetionik','Slika svjetionika u magli','galerija/slika5.jpg',10,13,8,4,now()),
-('Brijeg','Brijeg miruje u osami','galerija/slika6.jpg',12,13,10,3,now());
+('Brijeg','Brijeg miruje u osami','galerija/slika6.jpg',12,13,10,3,now()),
+('','','galerija/slika7.jpg',12,13,3,3,now()),
+('','','galerija/slika8.jpg',12,13,3,3,now()),
+('','','galerija/slika9.jpg',12,13,3,3,now()),
+('','','galerija/slika10.jpg',12,13,3,3,now()),
+('','','galerija/slika11.jpg',12,13,3,3,now()),
+('','','galerija/slika12.jpg',12,13,3,3,now()),
+('','','galerija/slika13.jpg',12,13,3,3,now()),
+('','','galerija/slika14.jpg',12,13,3,3,now()),
+('','','galerija/slika15.jpg',12,13,3,3,now()),
+('','','galerija/slika16.jpg',12,13,3,3,now()),
+('','','galerija/slika17.jpg',12,13,3,3,now()),
+('','','galerija/slika18.jpg',12,13,3,3,now()),
+('','','galerija/slika19.jpg',12,13,3,3,now()),
+('','','galerija/slika20.jpg',12,13,3,3,now()),
+('','','galerija/slika21.jpg',12,13,3,3,now()),
+('','','galerija/slika22.jpg',12,13,3,3,now()),
+('','','galerija/slika23.jpg',12,13,3,3,now());
+
+
