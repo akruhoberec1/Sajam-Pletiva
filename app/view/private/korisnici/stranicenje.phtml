@@ -1,0 +1,12 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" aria-label="Next" href="<?= App::config('url') ?>korisnici/index?uvjet=<?= $uvjet ?>&stranica=<?php echo $stranica - 1; ?>">Previous</a>
+        </li>
+        <li class="page-item current"><span class="show-for-sr">Vi ste na stranici</span>
+            <?= $stranica ?>/<?= $ukupnoStranica ?>
+        </li>
+        <li class="page-item"><a class="page-link" aria-label="Next" href="<?= App::config('url') ?>korisnici/index?uvjet=<?= $uvjet ?>&stranica=<?php echo $stranica + 1; ?>">Next</a>
+
+        </li>
+    </ul>
+</nav>
