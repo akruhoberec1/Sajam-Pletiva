@@ -1,22 +1,16 @@
 
     <div class="container program">
     <table><tr>
-        
-
-
         <?php foreach ($entiteti as $e)  : ?>
            
        <?php echo
        
-        '<img src=" ' . $e->slika . '" class="img-thumbnail" width="300px;" height="200px;">' 
+        '<a href=' . App::config('url') . 'galerija/promjena/' . $e->id . '>' .
+        '<img src=" ' . $e->slika . '" class="img-thumbnail" width="300px;" height="200px;"></a>' 
          ; 
          
-        echo '<pre>' ,
-        var_dump($e),
-        '</pre>';
-
+         
          ?>
-
 
        
         <?php endforeach; ?>

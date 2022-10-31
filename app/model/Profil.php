@@ -21,7 +21,7 @@ class Profil
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-        select * from galerija a left join users b 
+        select a.id,a.naziv,a.opis from galerija a left join users b 
         on a.users=b.id where b.id=:id
         
         ');

@@ -28,12 +28,14 @@ class GalerijaController extends Controller
 
     public function citajJednog($id)
     {
+        $sess = (array)$_SESSION['autoriziranuser']; 
+        $userid = $sess['id'];
         $lista = Profil::readGalleryByUserId($id);
 
         foreach($lista as $p){
             if(file_exists(BP. 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR
-        . 'galerija' . DIRECTORY_SEPARATOR . 'slika' . $p->id . '.jpg')){
-            $p->slika= App::config('url') . 'public/img/galerija/' . 'slika' . $p->id . '.jpg';
+        . 'galerija' . DIRECTORY_SEPARATOR . $userid . DIRECTORY_SEPARATOR . 'slika' . $p->id . '.jpg')){
+            $p->slika= App::config('url') . 'public/img/galerija/' . $userid . DIRECTORY_SEPARATOR . 'slika' . $p->id . '.jpg';
         }else{
             $p->slika= 'ne mogu pronaći putanju';
         }
@@ -51,17 +53,15 @@ class GalerijaController extends Controller
         $nova = Galerija::create([
             'naziv'=>'',
             'opis'=>'', 
-            'putanja'=>null,
             'boja'=>'',
             'kategorija'=>'',
-            'users'=>'',
             'pletivo'=>''
         ]);
         header('location: ' . App::config('url') 
                 . 'galerija/promjena/' . $nova);
     }
 
-    public function promjena($sifra)
+    public function promjena($id)
     {
         $kategorije=$this->ucitajKategorije();
         $boje=$this->ucitajBoje();
@@ -69,7 +69,7 @@ class GalerijaController extends Controller
 
         if(!isset($_POST['naziv'])){
 
-            $e = Galerija::readOne($sifra);
+            $e = Galerija::readOne($id);
             //Log::log($e);
             if($e==null){
                 header('location: ' . App::config('url') . 'galerija');
@@ -80,7 +80,7 @@ class GalerijaController extends Controller
         }
 
         $this->entitet = (object) $_POST;
-        $this->entitet->id=$sifra;
+        $this->entitet->id=$id;
 
     
 
@@ -89,7 +89,7 @@ class GalerijaController extends Controller
             $this->entitet->kategorija=null;
         }
         Galerija::update((array)$this->entitet);
-        header('location: ' . App::config('url') . 'galerija');
+        header('location: ' . App::config('url') . 'detalji');
         return;
         }
 
@@ -171,6 +171,33 @@ class GalerijaController extends Controller
             return false;
         }
         return true;
+    }
+
+    public function slikaUpload()
+    {
+        if(!isset($_POST)){
+            $this->poruka='Niste poslali datoteku';
+        }else{
+
+        }
+    }
+
+    public function admin()
+    {
+        $lista = Galerija::read();
+
+        foreach($lista as $p){
+            if(file_exists(BP. 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR
+        . 'galerija' . DIRECTORY_SEPARATOR . 'slika' . $p->id . '.jpg')){
+            $p->slika= App::config('url') . 'public/img/galerija/' . 'slika' . $p->id . '.jpg';
+        }else{
+            $p->slika= 'ne mogu pronaći putanju';
+        }
+    }
+
+        $this->view->render($this->phtmlDir . DIRECTORY_SEPARATOR . 'uredivanje',[
+            'entiteti'=>$lista
+        ]);
     }
 
 

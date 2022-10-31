@@ -203,4 +203,17 @@ class Korisnici
         return $izraz->fetchAll();
     }
 
+    public static function promjenaSifra($newpassword,$id)
+    {
+        $veza= DB::getInstance();
+        $izraz = $veza->prepare('
+        
+        update users set password=:newpassword where id=:id
+        
+        ');
+
+        $izraz->commit();  
+
+    }
+
 }

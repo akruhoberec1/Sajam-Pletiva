@@ -11,8 +11,8 @@ if($dev){
         'baza'=>[
             'server'=>'localhost',
             'baza'=>'bazaapp',
-            'korisnik'=>'phreeek',
-            'lozinka'=>'999'
+            'korisnik'=>'root',
+            'lozinka'=>''
         ]
     ];
 }else{

@@ -8,9 +8,9 @@ class Galerija
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
-            insert into galerija (naziv,opis,putanja,boja,kategorija,users,pletivo) values
-            (naziv=:naziv,opis=:opis,putanja=:putanja,boja=:boja,kategorija=:kategorija,
-            users=:users,pletivo=:pletivo
+            insert into galerija (naziv,opis,boja,kategorija,pletivo) values
+            (naziv=:naziv,opis=:opis,boja=:boja,kategorija=:kategorija,
+            pletivo=:pletivo
         ');
 
         $izraz->execute($p);
@@ -42,16 +42,16 @@ class Galerija
         return $izraz->fetchAll(); // vraća indeksni niz objekata tipa stdClass   
     }
 
-    public static function readOne($sifra)
+    public static function readOne($id)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-           select * from galerija where id=:sifra
+           select * from galerija where id=:id
         
         ');
         $izraz->execute([
-            'id'=>$sifra
+            'id'=>$id
         ]);
         $img = $izraz->fetch();
 
@@ -75,6 +75,9 @@ class Galerija
         $izraz->execute($p);
     }
 
-
+    public function ucitajJednu($id)
+    {
+        
+    }
 
 }

@@ -2,8 +2,12 @@
 enctype="multipart/form-data"
 action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
 
+
+
+<div class="container fluid">
+  <div clas="row">
+    <div class="col-md-4">
   <h4 class="text-center"></h4>
-<div class="justify content center" style="margin-left: 600px;"> 
   <label class="form-label">Prezime
     <input class="form-control" type="text" name="prezime" value="<?=$e->prezime?>" />
   </label>
@@ -17,10 +21,9 @@ action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
     <input class="form-control"  type="text" name="username" value="<?=$e->username?>" />
   </label >
   <br />
-  <label  class="form-label">Password
-    <input class="form-control"  type="text hidden" name="password" value="<?=$e->password?>" />
-  </label>
-  <br />
+</div>
+</div>
+<div class="col-md-4 ms-auto">
   <label  class="form-label">Email
     <input class="form-control" type="email" name="email" value="<?=$e->email?>" />
   </label>
@@ -29,14 +32,16 @@ action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
     <input class="form-control" type="text" name="country" value="<?=$e->country?>" />
   </label>
   <br />
-  <label>Slika
-    <input type="file" name="slika">
-  </label>
-  <br />
+
   <img src="<?=$e->slika?>" style="cursor: pointer;" class="slika" id="p_<?php $e->id ?>"> 
   <br />
-  <?=$poruka?>
 </div>
+  <?=$poruka?>
+
+</div>
+
+
+
  <div style="margin-left: 600px;">
     <div class="">
         <a href="<?=App::config('url')?>profil"><input class="btn btn-secondary col-3" value="Odustani"></a>
@@ -47,19 +52,44 @@ action="<?=App::config('url')?>profil/uredi/<?=$e->id?>">
       </div>
   </div>
 
-
   
-<div class="reveal" id="slikaModal" data-reveal>
-    <div style="max-height: 300px; overflow: auto;">
-        <img id="image" src="" alt="" />
-    </div>
-  
+ 
   <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
   <a href="#" id="spremi">Spremi</a>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
+
 </div>
 
 
 </form>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Promijenite šifru
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="sifraModal" tabindex="-1" aria-labelledby="sifraModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sifraModal">Promjena šifra</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <label class="form-label">Stara šifra
+      <input class="form-control" type="password" name="password" />
+      </label>
+      <label class="form-label">Nova šifra
+      <input class="form-control" type="password" name="newpassword1" />
+      </label>
+      <label class="form-label">Nova šifra
+      <input class="form-control" type="password" name="newpassword2" />
+      </label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <input type="submit" value="submit" class="btn btn-primary" />
+      </div>
+    </div>
+  </div>
+</div>

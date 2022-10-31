@@ -4,10 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$lifetime=600;
 session_start();
-setcookie(session_name(),session_id(),time() + $lifetime);
-
 
 define('BP',__DIR__ . DIRECTORY_SEPARATOR);
 define('BP_APP', BP . 'app' . DIRECTORY_SEPARATOR);
@@ -41,5 +38,3 @@ spl_autoload_register(function($klasa){
 });
 
 App::start();
-
-

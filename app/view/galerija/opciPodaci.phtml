@@ -1,0 +1,41 @@
+<label for="naziv">Naziv</label>
+<input type="text" name="naziv" id="naziv" value="<?=$e->naziv?>">
+
+<label for="boje">Boja</label>
+<select name="boje" id="boje">
+    <?php foreach($boje as $b): ?>
+        <option
+        <?php if ($e->boja==$b->sifra){
+            echo ' selected="selected"';
+        }
+        ?>
+        value="<?=$b->id?>"><?=$b->naziv?></option>
+    <?php endforeach; ?>
+</select>
+
+<label for="pletiva">Pletivo</label>
+<select name="pletiva" id="pletiva">
+    <?php foreach($pletiva as $p): ?>
+        <option
+        <?php if ($e->pletiva==$p->id){
+            echo ' selected="selected"';
+        }
+        ?>
+        value="<?=$p->sifra?>"><?=$p->naziv?></option>
+    <?php endforeach; ?>
+</select>
+
+
+<label for="kategorije">Kategorija</label>
+<select name="kategorije" id="kategorije">
+    <?php foreach($kategorije as $k): ?>
+        <option
+        <?php if ($e->kategorije==$k->id){
+            echo ' selected="selected"';
+        }
+        ?>
+        value="<?=$p->id?>"><?=$k->naziv?></option>
+    <?php endforeach; ?>
+</select>
+
+

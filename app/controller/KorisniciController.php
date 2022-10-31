@@ -52,7 +52,7 @@ class KorisniciController extends AutorizacijaController
         $this->view->render($this->phtmlDir . 'index',[  
             'entiteti'=>$lista,
             'uvjet'=>$uvjet,
-            'ukupnostranica'=>$ukupnoStranica,
+            'ukupnostranica'=>12,
             'css'=>'<link rel="stylesheet" href="' . App::config('url') . 'public/css/cropper.css">',
             'js'=>'<script src="' . App::config('url') . 'public/js/vendor/cropper.js"></script>
             <script src="' . App::config('url') . 'public/js/indexKorisnik.js"></script>'
@@ -190,4 +190,10 @@ class KorisniciController extends AutorizacijaController
 
         echo "OK";
     }
+
+    public function promjenaSifre($e)
+    {
+        
+    }
+
 }
